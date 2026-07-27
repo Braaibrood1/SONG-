@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Run Baby Run</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:#000;
+    overflow:hidden;
+    font-family:Arial,Helvetica,sans-serif;
+    color:white;
+}
+
+#intro{
+    position:fixed;
+    inset:0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    background:black;
+    z-index:10;
+}
+
+button{
+    padding:16px 42px;
+    font-size:20px;
+    background:white;
+    color:black;
+    border:none;
+    border-radius:50px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+button:hover{
+    transform:scale(1.05);
+}
+
+#player{
+    position:fixed;
+    inset:0;
+    width:100%;
+    height:100%;
+    display:none;
+}
+
+iframe{
+    width:100%;
+    height:100%;
+    border:none;
+}
+
+#overlay{
+    position:fixed;
+    inset:0;
+    display:none;
+    justify-content:center;
+    align-items:center;
+    pointer-events:none;
+}
+
+#text{
+    font-size:42px;
+    text-align:center;
+    opacity:0;
+    transition:opacity 2s;
+    text-shadow:0 0 30px black;
+}
+</style>
+
+</head>
+
+<body>
+
+<div id="intro">
+<h1 style="margin-bottom:30px;">Click to Enter</h1>
+<button onclick="start()">▶ Play</button>
+</div>
+
+<div id="player">
+<iframe
+id="yt"
+src=""
+allow="autoplay; fullscreen"
+allowfullscreen>
+</iframe>
+</div>
+
+<div id="overlay">
+<div id="text"></div>
+</div>
+
+<script>
+
+const messages=[
+"Close your eyes.",
+"Just listen.",
+"Take a breath.",
+"Enjoy the moment.",
+"Thank you for visiting."
+];
+
+function start(){
+
+document.getElementById("intro").style.display="none";
+document.getElementById("player").style.display="block";
+document.getElementById("overlay").style.display="flex";
+
+document.getElementById("yt").src=
+"https://www.youtube.com/embed/g1BaGm7syr4?autoplay=1&controls=0&rel=0";
+
+let i=0;
+
+function show(){
+
+if(i>=messages.length)return;
+
+const t=document.getElementById("text");
+
+t.style.opacity=0;
+
+setTimeout(()=>{
+
+t.innerHTML=messages[i];
+
+t.style.opacity=1;
+
+i++;
+
+setTimeout(show,5000);
+
+},1000);
+
+}
+
+show();
+
+}
+
+</script>
+
+</body>
+</html>
